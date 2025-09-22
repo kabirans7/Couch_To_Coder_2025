@@ -7,6 +7,8 @@ header {
     top: 0;
     z-index: 1000; /*Ensures header stays above other
     content by putting it forward in 3rd dimension */
+    display: flex;
+    justify-content: space-around;
 }
 
 
@@ -27,3 +29,46 @@ footer {
 
 }
 
+h1 {
+    font-family: "Pacifico";
+}
+
+header a {
+    text-decoration: none;
+    color: #f8f8f8;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    font-size: 2vh; 
+    /* 1% of Viewpoint Height */
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+/* CHECK FLEXBOX WEBSITE */
+
+header div {
+    display: flex;
+}
+
+form {
+    width: 33%;
+    margin: 48px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+h2 {
+    margin: 24px;
+}
+
+@media screen and (max-width: 600px) {
+    form {
+        width: 80%;
+        margin: 24px;
+    }
+}
