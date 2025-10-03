@@ -1,37 +1,13 @@
-//document is website itself but counterpart to HTML 
-// (allows JS to communicate with HTML)
-//create element create exact element from JS to HTML
-//Port 3000 in backend and 5500 is frontend in client server
-
-// const { setServers } = require("dns");
-// const { application } = require("express");
-
-//JS gets loaded into HTML file
-//get request and fetch method
 document.addEventListener("DOMContentLoaded", async () => {
+    // Fetch recipes
     const response = await fetch("http://localhost:3000/recipes");
     const recipes = await response.json();
+    
     for (recipe of recipes) {
-
-        //Create container that will hold recipe
         const recipeContainer = document.createElement("div");
-
-        //3 steps of elements nested inside element (e.g. h3)
-        //1. Create element 
-        // 2. Give element content 
-        // 3. Append it to the parent element (element above element we are working with)
-
-
-        //Use CSS for text format not h1, h2, h3
-        //1. Create Element
         const nameTag = document.createElement("h3");
-
-        //2. Element content 
         nameTag.innerText = recipe.name;
-
-        //3. Append to parent element to avoid being in the void
         recipeContainer.appendChild(nameTag);
-
 
         const cuisineTag = document.createElement("p");
         cuisineTag.innerText = recipe.cuisine;
@@ -41,58 +17,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         timeTag.innerText = recipe.time;
         recipeContainer.appendChild(timeTag);
 
-
-        //Create unordered list element for ingredients 
         const ingredientsListTag = document.createElement("ul");
-
-        //create the list items for the ingredients list
-        // arrays nested for loop
         for (ingredient of recipe.ingredients) {
             const ingredientsListItemTag = document.createElement("li");
             ingredientsListItemTag.innerText = ingredient;
             ingredientsListTag.appendChild(ingredientsListItemTag);
         }
-
         recipeContainer.appendChild(ingredientsListTag);
-
         recipeContainer.appendChild(document.createElement("br"));
 
-        //create the ordered list element for the steps of the recipe
         const stepsListTag = document.createElement("ol");
-
-        //create list items for steps list
         for (step of recipe.steps) {
             const stepsListItemTag = document.createElement("li");
             stepsListItemTag.innerText = step;
             stepsListTag.appendChild(stepsListItemTag);
-
         }
-
         recipeContainer.appendChild(stepsListTag);
 
-
-        //Put to HTML
-        //CSS Selector
         const recipeList = document.querySelector("#recipe-list");
-        recipeList.appendChild(recipeContainer)
-
-
-
+        recipeList.appendChild(recipeContainer);
     }
 
+    // Form submission
     const recipeForm = document.querySelector("form");
     recipeForm.addEventListener("submit", (event) => {
-        event.preventDefault(); //Block default behavior //No reloading page
+        event.preventDefault();
         
         const newRecipe = {};
-
         newRecipe.name = event.target.name.value;
         newRecipe.cuisine = event.target.cuisine.value;
         newRecipe.time = event.target.time.value;
         
         const ingredientsText = event.target.ingredients.value;
-        //Use regex
-        newRecipe.ingredients = ingredientsText.split(/\r?\n/); //break it down
+        newRecipe.ingredients = ingredientsText.split(/\r?\n/);
        
         const stepsText = event.target.steps.value;
         newRecipe.steps = stepsText.split(/\r?\n/);
@@ -100,22 +57,63 @@ document.addEventListener("DOMContentLoaded", async () => {
         fetch("http://localhost:3000/recipes", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json" //Telling backend to prepare for Json Data
+                "Content-Type": "application/json"
             },
-            //Actual message
             body: JSON.stringify(newRecipe) 
-        }
-        )
-
-
+        })
     })
     
+    // CHART SECTION - WITH DEBUGGING
+    console.log("Fetching cuisine data...");
     
+    try {
+        const cuisineResponse = await fetch("http://localhost:3000/cuisine-data");
+        console.log("Response status:", cuisineResponse.status);
+        
+        const cuisineData = await cuisineResponse.json();
+        console.log("Cuisine data received:", cuisineData);
+        
+        const xValues = cuisineData.map(item => item.cuisine);
+        const yValues = cuisineData.map(item => item.count);
+        
+        console.log("xValues:", xValues);
+        console.log("yValues:", yValues);
 
+        const canvas = document.getElementById("myChart");
+        console.log("Canvas element found:", canvas);
+        
+        if (!canvas) {
+            console.error("Canvas element not found!");
+            return;
+        }
 
+        const ctx = canvas.getContext("2d");
+        console.log("Canvas context:", ctx);
 
-
-
-})
+        const chart = new Chart(ctx, {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    data: yValues,
+                    backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"]
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Cuisine Popularity"
+                    }
+                }
+            }
+        });
+        
+        console.log("Chart created successfully:", chart);
+        
+    } catch (error) {
+        console.error("Error creating chart:", error);
+    }
+});
 
 
