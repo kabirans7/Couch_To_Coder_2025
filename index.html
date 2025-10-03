@@ -11,7 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- NEW --> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- NEW --> 
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> <!-- NEW --> 
-    <script src="app.js" defer></script> 
+    <script src="app.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>InstantGramen</title> 
 </head>
 
@@ -26,6 +27,7 @@
     </header>
     <main>
         <h2>My Fav Recipes</h2>
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
         <form>
             <p>Add new recipe:</p>
             <div class="form-row">
