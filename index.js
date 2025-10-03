@@ -31,6 +31,37 @@ app.get("/recipes", (request, response) => {
     
 });
 
+//Endpoint
+app.get("/cuisine-data", (request, response) => {
+    fs.readFile(recipesFilePath, "utf-8", (err, data) => {
+        const recipes = JSON.parse(data);
+        //reducing to single accumulated result
+        const occurrences = recipes.reduce((accumulator, recipe) => {
+            const currentCuisine = recipe.cuisine; 
+            //hides word cuisine using []
+            if (accumulator[currentCuisine]) {
+                // accumulator[currentCuisine] = 
+                accumulator[currentCuisine] += 1;
+            } else {
+                accumulator[currentCuisine] = 1;
+            }
+            return accumulator;
+        }, {}) 
+        // console.log(occurrences)
+        // response.json(recipes);
+
+        const cuisineData = Object.keys(occurrences).map(cuisine => ({
+            cuisine: cuisine,
+            count: occurrences[cuisine]
+        }));
+
+        response.json(cuisineData);
+    })
+});
+
+
+
+
 //Creating new recipe; use powershell
 app.post("/recipes", (request, response) => {
     const newRecipe = request.body; 
