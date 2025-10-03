@@ -52,18 +52,101 @@ header div {
     display: flex;
 }
 
+
+h2 {
+    margin: 24px;
+}
+
+/* Center the main heading */
+main h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin: 30px 0;
+}
+
+/* Style the form container as a box */
 form {
     width: 33%;
     margin: 48px;
+    background-color: #f9f9f9;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Style the form title */
+form p {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Style each form row */
 .form-row {
+    margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
 }
 
-h2 {
-    margin: 24px;
+/* Style labels */
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Style text inputs */
+form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+/* Style textareas */
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    min-height: 100px;
+    resize: vertical;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+/* Style the submit button */
+form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Button hover effect */
+form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Focus effects for inputs */
+form input[type="text"]:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }
 
 @media screen and (max-width: 600px) {
@@ -72,3 +155,88 @@ h2 {
         margin: 24px;
     }
 }
+
+/* Style the recipe list container */
+#recipe-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+/* Style each recipe container as a box */
+#recipe-list > div {
+    background-color: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover effect for recipe boxes */
+#recipe-list > div:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Style the recipe name */
+#recipe-list h3 {
+    color: #2c3e50;
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 8px;
+}
+
+/* Style cuisine and time paragraphs */
+#recipe-list > div > p {
+    color: #666;
+    font-size: 1em;
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+/* Style the ingredients list */
+#recipe-list ul {
+    background-color: #f9f9f9;
+    border-left: 4px solid #FF9800;
+    padding: 15px 15px 15px 35px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+#recipe-list ul li {
+    margin: 8px 0;
+    color: #444;
+}
+
+/* Style the steps list */
+#recipe-list ol {
+    background-color: #f0f8ff;
+    border-left: 4px solid #2196F3;
+    padding: 15px 15px 15px 35px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+#recipe-list ol li {
+    margin: 10px 0;
+    color: #444;
+    line-height: 1.6;
+}
+
+/* Style the chart canvas directly - no HTML changes needed */
+#myChart {
+    background-color: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: block;
+    max-width: 600px !important;
+}
+
